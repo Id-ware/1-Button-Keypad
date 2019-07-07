@@ -37,8 +37,6 @@ int charmove = 0;
 
 void setup()
 {
-  //Serial for position debug, not required.
-  //Serial.begin(115200);
   pinMode(buttonPin, INPUT);
 
   lcd.begin(16, 2);
@@ -83,19 +81,31 @@ void loop()
       
 
   if (buttonState == HIGH) {
+	  
     previousTime = currentTime;
+	  
+    //program write down to memory the time we pressed						  
+    //the button, and save it under previousTime					  
+    //(currentTime is the millis() timer)
+	  
     flag = true;
     
-    //position-debug:
-    //Serial.println(currentTime);
-    //Serial.print("       ");
-    //Serial.println(charmove);
-    //Serial.print("       ");
-    //Serial.print(wait_flag);
-    
+    //i puted flag here so the code wont turn on automaticlly.
+    //otherwise it will run all the time. a safe and simple way to make it run once, 
+    //is to make the flag go 'True' on button state 'HIGH', 
+    //and then in the other function we set it back to 'False'.	  
+	      
   }
   
   if ((currentTime - previousTime > period) && (flag == true)) {
+	  
+      //currentTime is millis(); and its subtracted  
+      //from the last time we pressed the button (previousTime)
+      //then we compare it to period which is our delay (50 milisecends)
+      //if it is bigger than our delay time (in other word, if it passed that delay time), 
+      //and the flag (from button press) is ture, the function below will start.
+      //in the function we reset the flag and the time so we can use the function again.	  
+	  
     flag = false;
     previousTime = currentTime;
     lcd.setCursor(charmove, 1);
@@ -103,6 +113,8 @@ void loop()
     inString = menu[i];
 
     if ((inString.toInt()) >= 9) {
+      //this is a reset function to reset the string back to zero
+      //it is enabled once the number past number 9	    	    
       i = 0;
     }
     else
@@ -137,3 +149,9 @@ void loop()
     }
 
 }
+
+// some of my own philosophy here:
+// "You can communicate with everything in this world,
+// either if its human or non-human, animal or machine.
+// the key patience and tolerance..."
+// - I.W.
