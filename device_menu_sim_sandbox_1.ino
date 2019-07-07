@@ -2,7 +2,7 @@
 //do not use beyond that time.
 //TODO: write a statment that fixes the "millis() 49-days bug"
 
-//Version: 07.07.2019 7:58 AM
+//Version: 07.07.2019 8:29 AM (cursor-position edition)
 //(date is better for me than random numbers..)
 
 #include <LiquidCrystal.h>
@@ -17,9 +17,9 @@ int buttonState;
 
 ///cursor-mode///
 //////////////////////////////////////
-unsigned long cursorTime = 0;
-int cursorPeriod = 100;
-bool cursorON = false;
+//unsigned long cursorTime = 0;
+//int cursorPeriod = 100;
+//bool cursorON = false;
 //////////////////////////////////////
 
 //////////////////////////////////////
@@ -45,7 +45,11 @@ void setup()
   lcd.setCursor(0, 0);
   lcd.clear();
   lcd.print("1-Button Keypad");
-
+  
+  //cursor-position
+  lcd.setCursor(0, 1);
+  lcd.cursor();
+  //
 }
 
 void loop()
@@ -56,13 +60,11 @@ void loop()
   ////////////////////////////////////////////////////////////////////////////
   //  first part of device's number select is below
   ////////////////////////////////////////////////////////////////////////////
-  //  TODO: make a timer that set the curser to next row, after 1 sec,
-  //        but timer reset if we press the button again within that time
-  ////////////////////////////////////////////////////////////////////////////
 
   unsigned long currentTime = millis();
   
-  ///cursor-mode///
+  ///cursor-blink-mode///
+  /*
   if (currentTime - cursorTime > cursorPeriod)
   {
     cursorTime = currentTime;
@@ -77,6 +79,7 @@ void loop()
         lcd.noCursor();
     }
   }
+  */
       
 
   if (buttonState == HIGH) {
@@ -106,6 +109,9 @@ void loop()
     {
       i++;
     }
+    //cursor-position off before print.
+    lcd.noCursor();
+    //
     lcd.print(inString);
     
     ///////////////////////////////
@@ -124,7 +130,10 @@ void loop()
         } else {
       charmove++;
         }
-	  //lcd.setCursor(charmove, 1);
+        //cursor-position on after movement.
+	  	lcd.setCursor(charmove, 1);
+        lcd.cursor();
+        //
     }
 
 }
