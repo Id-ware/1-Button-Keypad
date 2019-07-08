@@ -13,23 +13,18 @@
 //Version: 08.07.2019 11:46 AM (final)
 //(date is better for me than random numbers..)
 ////
-
+//-------------------------------------------------------------
 
 //**un-comment the lines below for the display you use**
-//
 //----------------------// Normal-LCD //---------------------
-//
 //#include <LiquidCrystal.h>
 //LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
-//
 //-----------------------// I2C-LCD //-----------------------
-//
-#include <Wire.h> 
+#include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 //
 
-
-LiquidCrystal_I2C lcd(0x27,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
+LiquidCrystal_I2C lcd(0x27, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 ////////////////////
 #define Password_Lenght 6 // Give enough room for five chars + NULL char
@@ -61,22 +56,15 @@ void setup()
 {
   //Serial.begin(115200);  //used for debugging, not required
   pinMode(buttonPin, INPUT);
-  
 
-//  **un-comment the lines below for the display you use**
-//
-//----------------------// Normal-LCD //---------------------
-//
-//lcd.begin(16, 2);
-//
-//-----------------------// I2C-LCD //-----------------------
-//
+  //  **un-comment the lines below for the display you use**
+  //----------------------// Normal-LCD //---------------------
+  //lcd.begin(16, 2);
+  //-----------------------// I2C-LCD //-----------------------
   lcd.init();
-  lcd.backlight();    // turn on backlighting 
+  lcd.backlight();    // turn on backlighting
+  //
 
-
-
-  
   lcd.setCursor(0, 0);
   lcd.clear();
   lcd.print("1-Button Keypad");
