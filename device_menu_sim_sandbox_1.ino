@@ -1,3 +1,7 @@
+// this is scraped code, do not use unless you know what you doing
+// i kept it here for experiments and as example only
+// the complete code is not this one.
+
 //////////
 //Warning: the code is using millis(), and will freak-out after 49 days running non-stop
 //do not use beyond that time.
@@ -5,7 +9,7 @@
 //TODO: write a statment that fixes the "millis() 49-days bug"
 //////////////////////////////
 //
-//Version: 07.07.2019 12:23 PM (cursor-position edition)
+//Version: experiment 08.07.2019 12:00 PM (cursor-position edition + cursor allways blink mode (incomplete))
 //edit: i removed the "String menu[]" because it is really not required for counting from 0 to 9, 
 //i replaced it with much simpler "int i" .
 ////
@@ -17,6 +21,13 @@ int i = 0;
 
 const int buttonPin = 7;    // the number of the pushbutton pin
 int buttonState;
+
+///cursor-mode///
+//////////////////////////////////////
+//unsigned long cursorTime = 0;
+//int cursorPeriod = 100;
+//bool cursorON = false;
+//////////////////////////////////////
 
 //////////////////////////////////////
 unsigned long previousTime = 0;
@@ -57,6 +68,24 @@ void loop()
 
   unsigned long currentTime = millis();
        
+    ///cursor-blink-mode///
+  /*
+  if (currentTime - cursorTime > cursorPeriod)
+  {
+    cursorTime = currentTime;
+    if (cursorON == false){
+      //turn cursor sign on
+      cursorON = true;
+      lcd.setCursor(charmove, 1);
+        lcd.cursor();
+    } else {
+      //turn cursor sign off
+      cursorON = false;
+        lcd.noCursor();
+    }
+  }
+  */ 
+  
   if (buttonState == HIGH) {
     previousTime = currentTime;
     
