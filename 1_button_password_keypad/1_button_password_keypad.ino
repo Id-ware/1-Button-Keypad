@@ -36,7 +36,7 @@ byte data_count = 0, master_count = 0;
 //char customKey;
 ////////////////////
 
-int single_digit = 0;
+int single_digit = -1;
 
 const int buttonPin = 7;    // the number of the pushbutton pin
 int buttonState;
@@ -64,7 +64,6 @@ void setup()
   lcd.init();
   lcd.backlight();    // turn on backlighting
   //
-
   lcd.setCursor(0, 0);
   lcd.clear();
   lcd.print("1-Button Keypad");
@@ -139,7 +138,7 @@ void loop()
     } else {
       charmove++;
     }
-    single_digit = 0;
+    single_digit = -1;
 
     ///
     if (data_count == Password_Lenght - 1) // if the array index is equal to the number of expected chars, compare data to master
